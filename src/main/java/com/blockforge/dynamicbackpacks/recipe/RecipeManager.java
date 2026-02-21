@@ -1,6 +1,7 @@
 package com.blockforge.dynamicbackpacks.recipe;
 
 import com.blockforge.dynamicbackpacks.DynamicBackpacks;
+import com.blockforge.dynamicbackpacks.backpack.Backpack;
 import com.blockforge.dynamicbackpacks.config.BackpackTierConfig;
 import com.blockforge.dynamicbackpacks.item.BackpackItemFactory;
 import org.bukkit.Bukkit;
@@ -15,8 +16,8 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.ShapedRecipe;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -76,8 +77,33 @@ public class RecipeManager implements Listener {
             }
 
             if (isBackpackKey(value)) {
-                // PLAYER_HEAD as placeholder — actual tier validated in PrepareItemCraftEvent
-                recipe.setIngredient(c, new RecipeChoice.MaterialChoice(Material.PLAYER_HEAD));
+                int reqTier = parseTierFromKey(value);
+                if (reqTier < 0) {
+                    log.warning("Tier " + tier + " recipe: invalid backpack key '" + value + "'.");
+                    valid = false;
+                    continue;
+                }
+                BackpackTierConfig reqConfig = plugin.getConfigManager().getTier(reqTier);
+                // Use a custom RecipeChoice so the recipe book shows the actual backpack texture
+                // and crafting only succeeds when the correct backpack tier is present
+                final ItemStack displayItem = reqConfig != null
+                        ? BackpackItemFactory.create(reqConfig, null)
+                        : new ItemStack(Material.PLAYER_HEAD);
+                final int finalReqTier = reqTier;
+                recipe.setIngredient(c, new RecipeChoice() {
+                    @Override
+                    public ItemStack getItemStack() {
+                        return displayItem.clone();
+                    }
+                    @Override
+                    public boolean test(ItemStack item) {
+                        return BackpackItemFactory.getBackpackTier(item) == finalReqTier;
+                    }
+                    @Override
+                    public RecipeChoice clone() {
+                        return this;
+                    }
+                });
             } else {
                 try {
                     Material mat = Material.valueOf(value.toUpperCase());
@@ -107,25 +133,8 @@ public class RecipeManager implements Listener {
         Integer tier = getTierForRecipe(recipe);
         if (tier == null) return;
 
-        BackpackTierConfig config = plugin.getConfigManager().getTier(tier);
-        if (config == null) return;
-
-        // ensure the PLAYER_HEAD slot holds the required backpack tier
-        Integer requiredBackpackTier = getRequiredBackpackTier(config);
-        if (requiredBackpackTier != null) {
-            boolean found = false;
-            for (ItemStack item : event.getInventory().getMatrix()) {
-                if (BackpackItemFactory.getBackpackTier(item) == requiredBackpackTier) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                event.getInventory().setResult(null);
-                return;
-            }
-        }
-
+        // Custom RecipeChoice.test() already validates the correct backpack tier is present;
+        // just ensure the result preview is always the fresh placeholder item.
         event.getInventory().setResult(placeholderResult(tier));
     }
 
@@ -152,14 +161,33 @@ public class RecipeManager implements Listener {
             return;
         }
 
-        // generate real item with fresh UUID and pre-save to DB
+        // Transfer contents from the ingredient backpack (if upgrading)
+        ItemStack[] transferredContents = new ItemStack[0];
+        UUID ingredientUUID = null;
+        for (ItemStack ingredient : event.getInventory().getMatrix()) {
+            if (ingredient == null) continue;
+            UUID uuid = BackpackItemFactory.getBackpackUUID(ingredient);
+            if (uuid != null) {
+                ingredientUUID = uuid;
+                Backpack existing = plugin.getDatabaseManager().loadItemBackpack(uuid);
+                if (existing != null) {
+                    transferredContents = existing.getContents();
+                }
+                break;
+            }
+        }
+
+        // Generate real item with fresh UUID
         ItemStack realItem = BackpackItemFactory.create(config, player.getUniqueId());
         UUID backpackUUID = BackpackItemFactory.getBackpackUUID(realItem);
 
-        com.blockforge.dynamicbackpacks.backpack.Backpack bp =
-                new com.blockforge.dynamicbackpacks.backpack.Backpack(
-                        backpackUUID, player.getUniqueId(), tier, new ItemStack[0]);
+        Backpack bp = new Backpack(backpackUUID, player.getUniqueId(), tier, transferredContents);
         plugin.getDatabaseManager().saveItemBackpack(bp);
+
+        // Remove the consumed ingredient backpack from the database
+        if (ingredientUUID != null) {
+            plugin.getDatabaseManager().deleteItemBackpack(ingredientUUID);
+        }
 
         event.getInventory().setResult(realItem);
     }
@@ -194,18 +222,12 @@ public class RecipeManager implements Listener {
         return value != null && value.startsWith(TIER_KEY_PREFIX) && value.endsWith(TIER_KEY_SUFFIX);
     }
 
-    private Integer getRequiredBackpackTier(BackpackTierConfig config) {
-        for (String value : config.getCraftingIngredients().values()) {
-            if (isBackpackKey(value)) {
-                try {
-                    String numPart = value.substring(TIER_KEY_PREFIX.length(),
-                            value.length() - TIER_KEY_SUFFIX.length());
-                    return Integer.parseInt(numPart);
-                } catch (NumberFormatException e) {
-                    return null;
-                }
-            }
+    private int parseTierFromKey(String value) {
+        try {
+            String numPart = value.substring(TIER_KEY_PREFIX.length(), value.length() - TIER_KEY_SUFFIX.length());
+            return Integer.parseInt(numPart);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            return -1;
         }
-        return null;
     }
 }

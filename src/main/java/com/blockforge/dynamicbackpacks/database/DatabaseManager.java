@@ -12,6 +12,7 @@ public interface DatabaseManager {
     // Item backpacks (keyed by UUID)
     void saveItemBackpack(Backpack backpack);
     Backpack loadItemBackpack(UUID uuid);
+    void deleteItemBackpack(UUID uuid);
 
     // Command backpacks (keyed by player UUID + slot)
     void saveCommandBackpack(Backpack backpack);

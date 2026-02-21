@@ -1,4 +1,4 @@
-config-version: 1
+config-version: 2
 
 # Plugin mode:
 #   both    - item backpacks AND command backpacks are enabled (default)
@@ -21,3 +21,8 @@ loot:
   # Set to true to allow backpacks to spawn in structure loot chests.
   # Configure per-tier chances in backpacks.yml under each tier's 'loot:' section.
   enabled: false
+
+# Inventory restrictions
+inventory:
+  # Set to true to allow shulker boxes to be placed inside backpacks.
+  allow-shulker-boxes: false

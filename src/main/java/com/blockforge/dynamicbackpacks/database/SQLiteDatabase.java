@@ -108,6 +108,17 @@ public class SQLiteDatabase implements DatabaseManager {
     }
 
     @Override
+    public void deleteItemBackpack(UUID uuid) {
+        String sql = "DELETE FROM item_backpacks WHERE uuid = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, uuid.toString());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            log.severe("Failed to delete item backpack " + uuid + ": " + e.getMessage());
+        }
+    }
+
+    @Override
     public void saveCommandBackpack(Backpack backpack) {
         String sql = "INSERT OR REPLACE INTO command_backpacks " +
                      "(player_uuid, slot, tier, contents, updated_at) VALUES (?, ?, ?, ?, ?)";

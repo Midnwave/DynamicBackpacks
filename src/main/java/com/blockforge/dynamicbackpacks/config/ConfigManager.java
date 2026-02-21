@@ -16,7 +16,7 @@ public class ConfigManager {
 
     public enum Mode { BOTH, ITEM, COMMAND, OFF }
 
-    private static final int CONFIG_VERSION = 1;
+    private static final int CONFIG_VERSION = 2;
 
     private final DynamicBackpacks plugin;
     private final Logger log;
@@ -25,6 +25,7 @@ public class ConfigManager {
     private String databaseFile;
     private int commandBackpackDefaultTier;
     private boolean lootEnabled;
+    private boolean allowShulkerBoxes;
     private final Map<Integer, BackpackTierConfig> tiers = new HashMap<>();
 
     public ConfigManager(DynamicBackpacks plugin) {
@@ -60,11 +61,15 @@ public class ConfigManager {
         commandBackpackDefaultTier = Math.max(1, Math.min(6,
                 cfg.getInt("command-backpacks.default-tier", 6)));
         lootEnabled = cfg.getBoolean("loot.enabled", false);
+        allowShulkerBoxes = cfg.getBoolean("inventory.allow-shulker-boxes", false);
     }
 
     private void addMissingDefaults(FileConfiguration cfg) {
         if (!cfg.contains("loot.enabled")) {
             cfg.set("loot.enabled", false);
+        }
+        if (!cfg.contains("inventory.allow-shulker-boxes")) {
+            cfg.set("inventory.allow-shulker-boxes", false);
         }
         cfg.set("config-version", CONFIG_VERSION);
         try {
@@ -143,6 +148,7 @@ public class ConfigManager {
     public String getDatabaseFile() { return databaseFile; }
     public int getCommandBackpackDefaultTier() { return commandBackpackDefaultTier; }
     public boolean isLootEnabled() { return lootEnabled; }
+    public boolean isShulkerBoxAllowed() { return allowShulkerBoxes; }
 
     public BackpackTierConfig getTier(int tier) { return tiers.get(tier); }
     public Map<Integer, BackpackTierConfig> getAllTiers() { return tiers; }
