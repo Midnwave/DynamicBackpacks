@@ -22,11 +22,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Gradle
-        run: ./gradlew build --no-daemon
+        run: ./gradlew shadowJar --no-daemon
 
       - name: Rename jar
         run: |
-          JAR=$(find build/libs -name "*.jar" ! -name "*-sources*" | head -1)
+          JAR=$(find build/libs -name "*.jar" ! -name "*-sources*" ! -name "*-plain*" | head -1)
           cp "$JAR" "DynamicBackpacks-dev${{ github.run_number }}.jar"
 
       - name: Create dev release
