@@ -1,0 +1,6 @@
+name: DynamicBackpacks
+version: '${version}'
+main: com.blockforge.dynamicbackpacks.DynamicBackpacks
+api-version: '1.21'
+description: Dynamic Backpacks plugin
+author: Midnwave
