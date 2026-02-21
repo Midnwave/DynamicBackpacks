@@ -27,8 +27,8 @@ dependencies {
 }
 
 shadowJar {
-    relocate 'org.sqlite', 'com.blockforge.dynamicbackpacks.libs.sqlite'
-    relocate 'org.xerial', 'com.blockforge.dynamicbackpacks.libs.xerial'
+    // Do NOT relocate sqlite-jdbc — relocation renames the Java classes but leaves the
+    // native JNI method names unchanged, causing UnsatisfiedLinkError at runtime.
     archiveClassifier.set('')
 }
 
