@@ -1,0 +1,109 @@
+# DynamicBackpacks - Tier Configuration
+#
+# Each tier defines:
+#   rows          - inventory rows (1-6). 1 row = 9 slots, 6 rows = 54 slots
+#   display-name  - item display name (supports & color codes)
+#   texture       - Base64 skin texture value for the player head
+#                   Get values from https://minecraft-heads.com
+#                   Click a head → "Minecraft URL" tab → copy the "Value" field
+#   crafting:
+#     enabled     - whether this tier's recipe is active
+#     shape       - 3-line crafting grid (each string is one row, 3 chars wide)
+#     ingredients - map of single characters to material names or TIER_N_BACKPACK
+#
+# Special ingredient key: TIER_N_BACKPACK (e.g. TIER_1_BACKPACK)
+# This requires a backpack of that tier to be in that crafting slot.
+
+tiers:
+  1:
+    rows: 1
+    display-name: '&6Tier 1 Backpack'
+    # Brown leather pouch - replace with your preferred texture
+    texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2Y5ZTI2NjkzNzYyNzFiNGYwM2Y5ZGI1NDZkZjQwYjI4ODYzNzIxMDQ1ZWMzMjNiNWRkOWZkMjkzMDE4OCJ9fX0='
+    crafting:
+      enabled: true
+      shape:
+        - 'LLL'
+        - 'LCL'
+        - 'LLL'
+      ingredients:
+        L: LEATHER
+        C: CHEST
+
+  2:
+    rows: 2
+    display-name: '&7Tier 2 Backpack'
+    # Iron backpack - replace with your preferred texture
+    texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTM2N2M5YzRhMTY0NmE5NzM5YzIzMDkzOGNiM2ViNzc2Y2JmYjU0ZTYwNjE5M2VjMDc0MDE5YjIxNzM4NiJ9fX0='
+    crafting:
+      enabled: true
+      shape:
+        - 'III'
+        - 'IBI'
+        - 'III'
+      ingredients:
+        I: IRON_INGOT
+        B: TIER_1_BACKPACK
+
+  3:
+    rows: 3
+    display-name: '&eTier 3 Backpack'
+    # Gold backpack - replace with your preferred texture
+    texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjc4N2VhNzVmYTFiMTc1ZjVkZjM0YjgxNjgwYmYzY2FhNTQwZWZmMGM4ZDEzMzA5ZTMyYWNiMzMxMWQifX19'
+    crafting:
+      enabled: true
+      shape:
+        - 'GGG'
+        - 'GBG'
+        - 'GGG'
+      ingredients:
+        G: GOLD_INGOT
+        B: TIER_2_BACKPACK
+
+  4:
+    rows: 4
+    display-name: '&bTier 4 Backpack'
+    # Diamond backpack - replace with your preferred texture
+    texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzI2NGMwM2U3NDZhMTE5N2I4MWI1MGNlZjE2ODc4MTNlMTMxY2U2MDk5MDJiNjA4ZGE1ZjFiZTM4MTFiMTZkZSJ9fX0='
+    crafting:
+      enabled: true
+      shape:
+        - 'DLD'
+        - 'LBL'
+        - 'DLD'
+      ingredients:
+        D: DIAMOND
+        L: LEATHER
+        B: TIER_3_BACKPACK
+
+  5:
+    rows: 5
+    display-name: '&aTier 5 Backpack'
+    # Emerald backpack - replace with your preferred texture
+    texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU0YjhiYTQxYTE0ZjFhYzEwZTYzN2EzMzRjZWQ5ODUzZDE4NDVmMDM4MDhkMmJlOGI5YTAxZTMwMGNkNSJ9fX0='
+    crafting:
+      enabled: true
+      shape:
+        - 'EIE'
+        - 'IBI'
+        - 'EIE'
+      ingredients:
+        E: EMERALD
+        I: IRON_INGOT
+        B: TIER_4_BACKPACK
+
+  6:
+    rows: 6
+    display-name: '&8Tier 6 Backpack'
+    # Netherite backpack - replace with your preferred texture
+    texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDZiYTYzMzQ0ZjQ5ZGQxYzRmNTQ4NjE0NjJhMGQ4MjMzYTcxYjhkNzRmNzY1YWQ5ZDZhZGYzNzM2ZmUyNCJ9fX0='
+    crafting:
+      enabled: true
+      shape:
+        - 'NGN'
+        - 'GBG'
+        - 'NGN'
+      ingredients:
+        N: NETHERITE_INGOT
+        G: GOLD_INGOT
+        B: TIER_5_BACKPACK

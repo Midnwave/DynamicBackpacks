@@ -4,3 +4,112 @@ main: com.blockforge.dynamicbackpacks.DynamicBackpacks
 api-version: '1.21'
 description: Dynamic Backpacks plugin
 author: Midnwave
+
+commands:
+  bp:
+    description: Open a command backpack or view a player's backpack (admin)
+    usage: /bp <1-10> | /bp view <player> <1-10>
+    permission: dynamicbackpacks.command.bp.use
+  dbp:
+    description: DynamicBackpacks admin commands
+    aliases: [dynamicbackpacks]
+    usage: /dbp <reload|give|restore>
+    permission: dynamicbackpacks.admin
+
+permissions:
+  # Item backpack usage per tier
+  dynamicbackpacks.use.item.tier.1:
+    description: Use Tier 1 item backpacks
+    default: true
+  dynamicbackpacks.use.item.tier.2:
+    description: Use Tier 2 item backpacks
+    default: true
+  dynamicbackpacks.use.item.tier.3:
+    description: Use Tier 3 item backpacks
+    default: true
+  dynamicbackpacks.use.item.tier.4:
+    description: Use Tier 4 item backpacks
+    default: true
+  dynamicbackpacks.use.item.tier.5:
+    description: Use Tier 5 item backpacks
+    default: true
+  dynamicbackpacks.use.item.tier.6:
+    description: Use Tier 6 item backpacks
+    default: true
+
+  # Crafting per tier
+  dynamicbackpacks.craft.tier.1:
+    description: Craft Tier 1 backpacks
+    default: true
+  dynamicbackpacks.craft.tier.2:
+    description: Craft Tier 2 backpacks
+    default: true
+  dynamicbackpacks.craft.tier.3:
+    description: Craft Tier 3 backpacks
+    default: true
+  dynamicbackpacks.craft.tier.4:
+    description: Craft Tier 4 backpacks
+    default: true
+  dynamicbackpacks.craft.tier.5:
+    description: Craft Tier 5 backpacks
+    default: true
+  dynamicbackpacks.craft.tier.6:
+    description: Craft Tier 6 backpacks
+    default: true
+
+  # Command backpack slots 1-10
+  dynamicbackpacks.command.bp.use:
+    description: Use the /bp command at all
+    default: true
+  dynamicbackpacks.command.bp.1:
+    description: Access command backpack slot 1
+    default: true
+  dynamicbackpacks.command.bp.2:
+    description: Access command backpack slot 2
+    default: true
+  dynamicbackpacks.command.bp.3:
+    description: Access command backpack slot 3
+    default: true
+  dynamicbackpacks.command.bp.4:
+    description: Access command backpack slot 4
+    default: false
+  dynamicbackpacks.command.bp.5:
+    description: Access command backpack slot 5
+    default: false
+  dynamicbackpacks.command.bp.6:
+    description: Access command backpack slot 6
+    default: false
+  dynamicbackpacks.command.bp.7:
+    description: Access command backpack slot 7
+    default: false
+  dynamicbackpacks.command.bp.8:
+    description: Access command backpack slot 8
+    default: false
+  dynamicbackpacks.command.bp.9:
+    description: Access command backpack slot 9
+    default: false
+  dynamicbackpacks.command.bp.10:
+    description: Access command backpack slot 10
+    default: false
+
+  # Admin permissions
+  dynamicbackpacks.admin:
+    description: Access all admin commands
+    default: op
+    children:
+      dynamicbackpacks.admin.view: true
+      dynamicbackpacks.admin.give: true
+      dynamicbackpacks.admin.restore: true
+      dynamicbackpacks.admin.reload: true
+  dynamicbackpacks.admin.view:
+    description: View/edit any player's command backpack
+    default: op
+  dynamicbackpacks.admin.give:
+    description: Give a player an item backpack
+    default: op
+  dynamicbackpacks.admin.restore:
+    description: Restore an orphaned item backpack by UUID
+    default: op
+  dynamicbackpacks.admin.reload:
+    description: Reload the plugin
+    default: op

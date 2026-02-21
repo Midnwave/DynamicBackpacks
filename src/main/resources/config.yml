@@ -1,0 +1,19 @@
+# DynamicBackpacks - Main Configuration
+
+# Plugin mode:
+#   both    - item backpacks AND command backpacks are enabled (default)
+#   item    - only physical item backpacks are enabled
+#   command - only command backpacks (/bp <id>) are enabled
+#   off     - all backpack functionality is disabled
+mode: both
+
+# Database settings
+database:
+  # SQLite database file name (stored in the plugin's data folder)
+  file: backpacks.db
+
+# Command backpacks (/bp <id>)
+command-backpacks:
+  # Default tier for all command backpack slots (1-6)
+  # This determines the size (rows) of command backpacks
+  default-tier: 6
