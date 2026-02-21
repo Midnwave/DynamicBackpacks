@@ -77,33 +77,9 @@ public class RecipeManager implements Listener {
             }
 
             if (isBackpackKey(value)) {
-                int reqTier = parseTierFromKey(value);
-                if (reqTier < 0) {
-                    log.warning("Tier " + tier + " recipe: invalid backpack key '" + value + "'.");
-                    valid = false;
-                    continue;
-                }
-                BackpackTierConfig reqConfig = plugin.getConfigManager().getTier(reqTier);
-                // Use a custom RecipeChoice so the recipe book shows the actual backpack texture
-                // and crafting only succeeds when the correct backpack tier is present
-                final ItemStack displayItem = reqConfig != null
-                        ? BackpackItemFactory.create(reqConfig, null)
-                        : new ItemStack(Material.PLAYER_HEAD);
-                final int finalReqTier = reqTier;
-                recipe.setIngredient(c, new RecipeChoice() {
-                    @Override
-                    public ItemStack getItemStack() {
-                        return displayItem.clone();
-                    }
-                    @Override
-                    public boolean test(ItemStack item) {
-                        return BackpackItemFactory.getBackpackTier(item) == finalReqTier;
-                    }
-                    @Override
-                    public RecipeChoice clone() {
-                        return this;
-                    }
-                });
+                // MaterialChoice(PLAYER_HEAD) is used so any player head (including backpacks)
+                // satisfies the slot; the correct tier is validated in PrepareItemCraftEvent.
+                recipe.setIngredient(c, new RecipeChoice.MaterialChoice(Material.PLAYER_HEAD));
             } else {
                 try {
                     Material mat = Material.valueOf(value.toUpperCase());
@@ -133,8 +109,25 @@ public class RecipeManager implements Listener {
         Integer tier = getTierForRecipe(recipe);
         if (tier == null) return;
 
-        // Custom RecipeChoice.test() already validates the correct backpack tier is present;
-        // just ensure the result preview is always the fresh placeholder item.
+        BackpackTierConfig config = plugin.getConfigManager().getTier(tier);
+        if (config == null) return;
+
+        // MaterialChoice(PLAYER_HEAD) matches any player head — validate the correct backpack tier
+        Integer requiredTier = getRequiredIngredientTier(config);
+        if (requiredTier != null) {
+            boolean found = false;
+            for (ItemStack item : event.getInventory().getMatrix()) {
+                if (BackpackItemFactory.getBackpackTier(item) == requiredTier) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                event.getInventory().setResult(null);
+                return;
+            }
+        }
+
         event.getInventory().setResult(placeholderResult(tier));
     }
 
@@ -220,6 +213,16 @@ public class RecipeManager implements Listener {
 
     private boolean isBackpackKey(String value) {
         return value != null && value.startsWith(TIER_KEY_PREFIX) && value.endsWith(TIER_KEY_SUFFIX);
+    }
+
+    private Integer getRequiredIngredientTier(BackpackTierConfig config) {
+        for (String value : config.getCraftingIngredients().values()) {
+            if (isBackpackKey(value)) {
+                int t = parseTierFromKey(value);
+                return t >= 0 ? t : null;
+            }
+        }
+        return null;
     }
 
     private int parseTierFromKey(String value) {
