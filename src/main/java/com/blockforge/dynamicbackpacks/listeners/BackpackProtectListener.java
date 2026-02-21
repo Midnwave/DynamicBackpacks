@@ -110,6 +110,7 @@ public class BackpackProtectListener implements Listener {
 
     private static boolean isShulkerBox(ItemStack item) {
         if (item == null) return false;
-        return item.getType().name().endsWith("_SHULKER_BOX");
+        String name = item.getType().name();
+        return name.equals("SHULKER_BOX") || name.endsWith("_SHULKER_BOX");
     }
 }

@@ -186,15 +186,24 @@ public class AdminCommand implements CommandExecutor, TabCompleter {
             }
         } else if (args.length == 2) {
             String sub = args[0].toLowerCase();
-            if (sub.equals("give") || sub.equals("restore")) {
+            if (sub.equals("give")) {
                 String partial = args[1].toLowerCase();
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     if (p.getName().toLowerCase().startsWith(partial)) completions.add(p.getName());
                 }
             }
-        } else if (args.length == 3 && args[0].equalsIgnoreCase("give")) {
-            for (int i = 1; i <= plugin.getConfigManager().getMaxTier(); i++) {
-                completions.add(String.valueOf(i));
+            // restore arg2 is a backpack UUID — no tab completion
+        } else if (args.length == 3) {
+            String sub = args[0].toLowerCase();
+            if (sub.equals("give")) {
+                for (int i = 1; i <= plugin.getConfigManager().getMaxTier(); i++) {
+                    completions.add(String.valueOf(i));
+                }
+            } else if (sub.equals("restore")) {
+                String partial = args[2].toLowerCase();
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    if (p.getName().toLowerCase().startsWith(partial)) completions.add(p.getName());
+                }
             }
         }
         return completions;
