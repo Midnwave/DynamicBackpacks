@@ -1,16 +1,17 @@
 package com.blockforge.dynamicbackpacks.listeners;
 
 import com.blockforge.dynamicbackpacks.DynamicBackpacks;
-import com.blockforge.dynamicbackpacks.config.ConfigManager;
 import com.blockforge.dynamicbackpacks.item.BackpackItemFactory;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+
 
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public class BackpackInteractListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
     public void onInteract(PlayerInteractEvent event) {
         if (event.getHand() != EquipmentSlot.HAND) return;
 
@@ -37,7 +38,9 @@ public class BackpackInteractListener implements Listener {
         ItemStack item = event.getItem();
         if (!BackpackItemFactory.isBackpack(item)) return;
 
+        // prevent any block interaction (open chest, place block, etc.)
         event.setCancelled(true);
+        event.setUseInteractedBlock(Event.Result.DENY);
 
         if (!plugin.getConfigManager().isItemEnabled()) {
             event.getPlayer().sendMessage(ChatColor.RED + "Item backpacks are disabled on this server.");
@@ -55,6 +58,10 @@ public class BackpackInteractListener implements Listener {
             return;
         }
 
-        plugin.getBackpackManager().openItemBackpack(player, backpackUUID);
+        @SuppressWarnings("deprecation")
+        String displayName = item.getItemMeta() != null && item.getItemMeta().hasDisplayName()
+                ? item.getItemMeta().getDisplayName() : "Backpack";
+
+        plugin.getBackpackManager().openItemBackpack(player, backpackUUID, tier, displayName);
     }
 }

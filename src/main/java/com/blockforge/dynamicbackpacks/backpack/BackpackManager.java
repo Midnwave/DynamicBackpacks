@@ -27,7 +27,7 @@ public class BackpackManager {
         this.session = plugin.getBackpackSession();
     }
 
-    public void openItemBackpack(Player player, UUID backpackUUID) {
+    public void openItemBackpack(Player player, UUID backpackUUID, int tier, String displayName) {
         String key = BackpackSession.itemKey(backpackUUID);
 
         if (session.isOpen(key)) {
@@ -46,12 +46,13 @@ public class BackpackManager {
         if (cache.containsKey(key)) {
             backpack = cache.get(key);
         } else {
-            // only shown on DB fetch, not cache hit
-            player.sendMessage(ChatColor.GRAY + "Loading backpack...");
             backpack = db.loadItemBackpack(backpackUUID);
             if (backpack == null) {
-                player.sendMessage(ChatColor.RED + "Backpack data could not be found.");
-                return;
+                // loot-found backpack: lazily create DB entry on first open
+                backpack = new Backpack(backpackUUID, player.getUniqueId(), tier, new org.bukkit.inventory.ItemStack[0]);
+                db.saveItemBackpack(backpack);
+            } else {
+                player.sendMessage(ChatColor.GRAY + "Loading backpack...");
             }
             cache.put(key, backpack);
         }
@@ -62,7 +63,7 @@ public class BackpackManager {
             return;
         }
 
-        Inventory inv = BackpackGUI.build(backpack, tierConfig, false);
+        Inventory inv = BackpackGUI.build(backpack, tierConfig, displayName, false);
         session.open(key, player.getUniqueId(), inv);
         player.openInventory(inv);
     }
@@ -93,7 +94,7 @@ public class BackpackManager {
             return;
         }
 
-        Inventory inv = BackpackGUI.build(backpack, tierConfig, false);
+        Inventory inv = BackpackGUI.build(backpack, tierConfig, tierConfig.getDisplayName(), false);
         session.open(key, player.getUniqueId(), inv);
         player.openInventory(inv);
     }
@@ -124,7 +125,7 @@ public class BackpackManager {
             return;
         }
 
-        Inventory inv = BackpackGUI.build(backpack, tierConfig, true);
+        Inventory inv = BackpackGUI.build(backpack, tierConfig, tierConfig.getDisplayName(), true);
         session.open(key, admin.getUniqueId(), inv);
         admin.openInventory(inv);
 

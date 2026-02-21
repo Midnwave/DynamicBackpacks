@@ -10,6 +10,7 @@ import com.blockforge.dynamicbackpacks.database.SQLiteDatabase;
 import com.blockforge.dynamicbackpacks.listeners.BackpackInteractListener;
 import com.blockforge.dynamicbackpacks.listeners.BackpackInventoryListener;
 import com.blockforge.dynamicbackpacks.listeners.BackpackProtectListener;
+import com.blockforge.dynamicbackpacks.loot.LootManager;
 import com.blockforge.dynamicbackpacks.recipe.RecipeManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,6 +23,7 @@ public class DynamicBackpacks extends JavaPlugin {
     private BackpackSession backpackSession;
     private BackpackManager backpackManager;
     private RecipeManager recipeManager;
+    private LootManager lootManager;
     private UpdateChecker updateChecker;
 
     @Override
@@ -51,6 +53,9 @@ public class DynamicBackpacks extends JavaPlugin {
         recipeManager = new RecipeManager(this);
         recipeManager.registerAll();
         getServer().getPluginManager().registerEvents(recipeManager, this);
+
+        lootManager = new LootManager(this);
+        getServer().getPluginManager().registerEvents(lootManager, this);
 
         getServer().getPluginManager().registerEvents(new BackpackInteractListener(this), this);
         getServer().getPluginManager().registerEvents(new BackpackProtectListener(this), this);

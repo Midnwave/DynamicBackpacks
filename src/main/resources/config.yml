@@ -1,4 +1,4 @@
-# DynamicBackpacks - Main Configuration
+config-version: 1
 
 # Plugin mode:
 #   both    - item backpacks AND command backpacks are enabled (default)
@@ -9,11 +9,15 @@ mode: both
 
 # Database settings
 database:
-  # SQLite database file name (stored in the plugin's data folder)
   file: backpacks.db
 
 # Command backpacks (/bp <id>)
 command-backpacks:
   # Default tier for all command backpack slots (1-6)
-  # This determines the size (rows) of command backpacks
   default-tier: 6
+
+# Loot chest settings
+loot:
+  # Set to true to allow backpacks to spawn in structure loot chests.
+  # Configure per-tier chances in backpacks.yml under each tier's 'loot:' section.
+  enabled: false

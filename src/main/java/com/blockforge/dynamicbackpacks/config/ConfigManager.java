@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,12 +16,15 @@ public class ConfigManager {
 
     public enum Mode { BOTH, ITEM, COMMAND, OFF }
 
+    private static final int CONFIG_VERSION = 1;
+
     private final DynamicBackpacks plugin;
     private final Logger log;
 
     private Mode mode;
     private String databaseFile;
     private int commandBackpackDefaultTier;
+    private boolean lootEnabled;
     private final Map<Integer, BackpackTierConfig> tiers = new HashMap<>();
 
     public ConfigManager(DynamicBackpacks plugin) {
@@ -39,6 +43,11 @@ public class ConfigManager {
         plugin.reloadConfig();
         FileConfiguration cfg = plugin.getConfig();
 
+        int storedVersion = cfg.getInt("config-version", 0);
+        if (storedVersion < CONFIG_VERSION) {
+            addMissingDefaults(cfg);
+        }
+
         String modeStr = cfg.getString("mode", "both").toUpperCase();
         try {
             mode = Mode.valueOf(modeStr);
@@ -50,6 +59,20 @@ public class ConfigManager {
         databaseFile = cfg.getString("database.file", "backpacks.db");
         commandBackpackDefaultTier = Math.max(1, Math.min(6,
                 cfg.getInt("command-backpacks.default-tier", 6)));
+        lootEnabled = cfg.getBoolean("loot.enabled", false);
+    }
+
+    private void addMissingDefaults(FileConfiguration cfg) {
+        if (!cfg.contains("loot.enabled")) {
+            cfg.set("loot.enabled", false);
+        }
+        cfg.set("config-version", CONFIG_VERSION);
+        try {
+            cfg.save(new File(plugin.getDataFolder(), "config.yml"));
+            log.info("config.yml migrated to version " + CONFIG_VERSION + ".");
+        } catch (IOException e) {
+            log.warning("Failed to save migrated config.yml: " + e.getMessage());
+        }
     }
 
     private void loadBackpacksConfig() {
@@ -94,8 +117,21 @@ public class ConfigManager {
                 }
             }
 
+            Map<String, int[]> lootMap = new HashMap<>();
+            ConfigurationSection lootSection = ts.getConfigurationSection("loot");
+            if (lootSection != null) {
+                for (String loc : lootSection.getKeys(false)) {
+                    ConfigurationSection locSec = lootSection.getConfigurationSection(loc);
+                    if (locSec != null) {
+                        boolean enabled = locSec.getBoolean("enabled", false);
+                        int chance = Math.max(0, Math.min(100, locSec.getInt("chance", 0)));
+                        lootMap.put(loc, new int[]{enabled ? 1 : 0, chance});
+                    }
+                }
+            }
+
             tiers.put(tierNum, new BackpackTierConfig(tierNum, rows, displayName, texture,
-                    craftEnabled, shape, ingredients));
+                    craftEnabled, shape, ingredients, lootMap));
         }
 
         log.info("Loaded " + tiers.size() + " backpack tier(s).");
@@ -106,6 +142,7 @@ public class ConfigManager {
     public boolean isCommandEnabled() { return mode == Mode.BOTH || mode == Mode.COMMAND; }
     public String getDatabaseFile() { return databaseFile; }
     public int getCommandBackpackDefaultTier() { return commandBackpackDefaultTier; }
+    public boolean isLootEnabled() { return lootEnabled; }
 
     public BackpackTierConfig getTier(int tier) { return tiers.get(tier); }
     public Map<Integer, BackpackTierConfig> getAllTiers() { return tiers; }

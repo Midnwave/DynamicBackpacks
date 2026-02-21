@@ -15,9 +15,9 @@ public class BackpackGUI {
     private BackpackGUI() {}
 
     @SuppressWarnings("deprecation")
-    public static Inventory build(Backpack backpack, BackpackTierConfig tierConfig, boolean adminView) {
+    public static Inventory build(Backpack backpack, BackpackTierConfig tierConfig, String displayName, boolean adminView) {
         int slots = tierConfig.getRows() * 9;
-        String rawName = ChatColor.translateAlternateColorCodes('&', tierConfig.getDisplayName());
+        String rawName = ChatColor.translateAlternateColorCodes('&', displayName);
         String title = TITLE_PREFIX + rawName + (adminView ? ChatColor.GRAY + " (Admin)" : "");
 
         Inventory inv = Bukkit.createInventory(null, slots, title);
