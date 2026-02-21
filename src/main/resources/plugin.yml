@@ -20,77 +20,77 @@ permissions:
   # Item backpack usage per tier
   dynamicbackpacks.use.item.tier.1:
     description: Use Tier 1 item backpacks
-    default: true
+    default: op
   dynamicbackpacks.use.item.tier.2:
     description: Use Tier 2 item backpacks
-    default: true
+    default: op
   dynamicbackpacks.use.item.tier.3:
     description: Use Tier 3 item backpacks
-    default: true
+    default: op
   dynamicbackpacks.use.item.tier.4:
     description: Use Tier 4 item backpacks
-    default: true
+    default: op
   dynamicbackpacks.use.item.tier.5:
     description: Use Tier 5 item backpacks
-    default: true
+    default: op
   dynamicbackpacks.use.item.tier.6:
     description: Use Tier 6 item backpacks
-    default: true
+    default: op
 
   # Crafting per tier
   dynamicbackpacks.craft.tier.1:
     description: Craft Tier 1 backpacks
-    default: true
+    default: op
   dynamicbackpacks.craft.tier.2:
     description: Craft Tier 2 backpacks
-    default: true
+    default: op
   dynamicbackpacks.craft.tier.3:
     description: Craft Tier 3 backpacks
-    default: true
+    default: op
   dynamicbackpacks.craft.tier.4:
     description: Craft Tier 4 backpacks
-    default: true
+    default: op
   dynamicbackpacks.craft.tier.5:
     description: Craft Tier 5 backpacks
-    default: true
+    default: op
   dynamicbackpacks.craft.tier.6:
     description: Craft Tier 6 backpacks
-    default: true
+    default: op
 
   # Command backpack slots 1-10
   dynamicbackpacks.command.bp.use:
     description: Use the /bp command at all
-    default: true
+    default: op
   dynamicbackpacks.command.bp.1:
     description: Access command backpack slot 1
-    default: true
+    default: op
   dynamicbackpacks.command.bp.2:
     description: Access command backpack slot 2
-    default: true
+    default: op
   dynamicbackpacks.command.bp.3:
     description: Access command backpack slot 3
-    default: true
+    default: op
   dynamicbackpacks.command.bp.4:
     description: Access command backpack slot 4
-    default: false
+    default: op
   dynamicbackpacks.command.bp.5:
     description: Access command backpack slot 5
-    default: false
+    default: op
   dynamicbackpacks.command.bp.6:
     description: Access command backpack slot 6
-    default: false
+    default: op
   dynamicbackpacks.command.bp.7:
     description: Access command backpack slot 7
-    default: false
+    default: op
   dynamicbackpacks.command.bp.8:
     description: Access command backpack slot 8
-    default: false
+    default: op
   dynamicbackpacks.command.bp.9:
     description: Access command backpack slot 9
-    default: false
+    default: op
   dynamicbackpacks.command.bp.10:
     description: Access command backpack slot 10
-    default: false
+    default: op
 
   # Admin permissions
   dynamicbackpacks.admin:

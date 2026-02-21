@@ -105,6 +105,12 @@ public class ConfigManager {
             ConfigurationSection ts = tiersSection.getConfigurationSection(key);
             if (ts == null) continue;
 
+            boolean tierEnabled = ts.getBoolean("enabled", true);
+            if (!tierEnabled) {
+                log.info("Tier " + tierNum + " is disabled — skipping.");
+                continue;
+            }
+
             int rows = Math.max(1, Math.min(6, ts.getInt("rows", tierNum)));
             String displayName = ts.getString("display-name", "&fTier " + tierNum + " Backpack");
             String texture = ts.getString("texture", "");

@@ -1,6 +1,7 @@
 # DynamicBackpacks - Tier Configuration
 #
 # Each tier defines:
+#   enabled       - set to false to completely disable this tier (default: true)
 #   rows          - inventory rows (1-6). 1 row = 9 slots, 6 rows = 54 slots
 #   display-name  - item display name (supports & color codes)
 #   texture       - Base64 skin texture value (from minecraft-heads.com)
@@ -15,6 +16,7 @@
 
 tiers:
   1:
+    enabled: true
     rows: 1
     display-name: '&6Tier 1 Backpack'
     texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODM1MWU1MDU5ODk4MzhlMjcyODdlN2FmYmM3Zjk3ZTc5NmNhYjVmMzU5OGE3NjE2MGMxMzFjOTQwZDBjNSJ9fX0='
@@ -28,25 +30,88 @@ tiers:
         L: LEATHER
         C: CHEST
     loot:
+      dungeon:                    { enabled: false, chance: 8 }
+      mineshaft:                  { enabled: false, chance: 6 }
+      desert_temple:              { enabled: false, chance: 7 }
+      jungle_temple:              { enabled: false, chance: 7 }
+      stronghold_corridor:        { enabled: false, chance: 5 }
+      stronghold_library:         { enabled: false, chance: 6 }
+      stronghold_crossing:        { enabled: false, chance: 5 }
+      woodland_mansion:           { enabled: false, chance: 8 }
+      igloo:                      { enabled: false, chance: 6 }
+      pillager_outpost:           { enabled: false, chance: 7 }
+      shipwreck_map:              { enabled: false, chance: 5 }
+      shipwreck_supply:           { enabled: false, chance: 6 }
+      shipwreck_treasure:         { enabled: false, chance: 7 }
+      ocean_ruin_big:             { enabled: false, chance: 5 }
+      ocean_ruin_small:           { enabled: false, chance: 4 }
+      buried_treasure:            { enabled: false, chance: 7 }
+      ruined_portal:              { enabled: false, chance: 5 }
+      ancient_city:               { enabled: false, chance: 0 }
+      ancient_city_ice_box:       { enabled: false, chance: 0 }
+      village_armorer:            { enabled: false, chance: 6 }
+      village_butcher:            { enabled: false, chance: 6 }
+      village_cartographer:       { enabled: false, chance: 6 }
+      village_desert_house:       { enabled: false, chance: 7 }
+      village_fisher:             { enabled: false, chance: 6 }
+      village_fletcher:           { enabled: false, chance: 6 }
+      village_mason:              { enabled: false, chance: 6 }
+      village_plains_house:       { enabled: false, chance: 7 }
+      village_savanna_house:      { enabled: false, chance: 7 }
+      village_shepherd:           { enabled: false, chance: 6 }
+      village_snowy_house:        { enabled: false, chance: 7 }
+      village_taiga_house:        { enabled: false, chance: 7 }
+      village_tannery:            { enabled: false, chance: 6 }
+      village_temple:             { enabled: false, chance: 6 }
+      village_toolsmith:          { enabled: false, chance: 6 }
+      village_weaponsmith:        { enabled: false, chance: 6 }
+      nether_fortress:            { enabled: false, chance: 0 }
+      bastion_bridge:             { enabled: false, chance: 0 }
+      bastion_hoglin_stable:      { enabled: false, chance: 0 }
+      bastion_other:              { enabled: false, chance: 0 }
+      bastion_treasure:           { enabled: false, chance: 0 }
+      end_city:                   { enabled: false, chance: 0 }
+      trial_chambers_supply:      { enabled: false, chance: 0 }
+      trial_chambers_corridor:    { enabled: false, chance: 0 }
+      trial_chambers_entrance:    { enabled: false, chance: 0 }
+      trial_chambers_intersection: { enabled: false, chance: 0 }
+      trial_chambers_reward:      { enabled: false, chance: 0 }
+      trial_chambers_reward_rare: { enabled: false, chance: 0 }
+
+  2:
+    enabled: true
+    rows: 2
+    display-name: '&7Tier 2 Backpack'
+    texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWE1ZmM3NjM1Mjk2Y2ExODNmZDMwYjBmYjVmNGMxOGNmYzIxNjc2OGYwZmJlYmI4NjVlMDIxMWFiNDNiN2IifX19'
+    crafting:
+      enabled: true
+      shape:
+        - 'III'
+        - 'IBI'
+        - 'III'
+      ingredients:
+        I: IRON_INGOT
+        B: TIER_1_BACKPACK
+    loot:
       dungeon:                    { enabled: false, chance: 5 }
-      mineshaft:                  { enabled: false, chance: 3 }
+      mineshaft:                  { enabled: false, chance: 4 }
       desert_temple:              { enabled: false, chance: 5 }
       jungle_temple:              { enabled: false, chance: 5 }
       stronghold_corridor:        { enabled: false, chance: 3 }
       stronghold_library:         { enabled: false, chance: 4 }
       stronghold_crossing:        { enabled: false, chance: 3 }
-      woodland_mansion:           { enabled: false, chance: 5 }
-      igloo:                      { enabled: false, chance: 4 }
-      pillager_outpost:           { enabled: false, chance: 5 }
+      woodland_mansion:           { enabled: false, chance: 6 }
+      igloo:                      { enabled: false, chance: 3 }
+      pillager_outpost:           { enabled: false, chance: 4 }
       shipwreck_map:              { enabled: false, chance: 3 }
-      shipwreck_supply:           { enabled: false, chance: 4 }
+      shipwreck_supply:           { enabled: false, chance: 3 }
       shipwreck_treasure:         { enabled: false, chance: 5 }
-      ocean_ruin_big:             { enabled: false, chance: 4 }
-      ocean_ruin_small:           { enabled: false, chance: 3 }
+      ocean_ruin_big:             { enabled: false, chance: 3 }
+      ocean_ruin_small:           { enabled: false, chance: 0 }
       buried_treasure:            { enabled: false, chance: 5 }
-      ruined_portal:              { enabled: false, chance: 4 }
-      ancient_city:               { enabled: false, chance: 3 }
-      ancient_city_ice_box:       { enabled: false, chance: 3 }
+      ruined_portal:              { enabled: false, chance: 3 }
+      ancient_city:               { enabled: false, chance: 0 }
+      ancient_city_ice_box:       { enabled: false, chance: 0 }
       village_armorer:            { enabled: false, chance: 3 }
       village_butcher:            { enabled: false, chance: 3 }
       village_cartographer:       { enabled: false, chance: 3 }
@@ -63,82 +128,21 @@ tiers:
       village_temple:             { enabled: false, chance: 3 }
       village_toolsmith:          { enabled: false, chance: 3 }
       village_weaponsmith:        { enabled: false, chance: 3 }
-      nether_fortress:            { enabled: false, chance: 4 }
-      bastion_bridge:             { enabled: false, chance: 3 }
-      bastion_hoglin_stable:      { enabled: false, chance: 3 }
-      bastion_other:              { enabled: false, chance: 4 }
-      bastion_treasure:           { enabled: false, chance: 3 }
-      end_city:                   { enabled: false, chance: 4 }
-      trial_chambers_supply:      { enabled: false, chance: 5 }
-      trial_chambers_corridor:    { enabled: false, chance: 4 }
-      trial_chambers_entrance:    { enabled: false, chance: 4 }
-      trial_chambers_intersection: { enabled: false, chance: 3 }
-      trial_chambers_reward:      { enabled: false, chance: 5 }
-      trial_chambers_reward_rare: { enabled: false, chance: 3 }
-
-  2:
-    rows: 2
-    display-name: '&7Tier 2 Backpack'
-    texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWE1ZmM3NjM1Mjk2Y2ExODNmZDMwYjBmYjVmNGMxOGNmYzIxNjc2OGYwZmJlYmI4NjVlMDIxMWFiNDNiN2IifX19'
-    crafting:
-      enabled: true
-      shape:
-        - 'III'
-        - 'IBI'
-        - 'III'
-      ingredients:
-        I: IRON_INGOT
-        B: TIER_1_BACKPACK
-    loot:
-      dungeon:                    { enabled: false, chance: 3 }
-      mineshaft:                  { enabled: false, chance: 2 }
-      desert_temple:              { enabled: false, chance: 3 }
-      jungle_temple:              { enabled: false, chance: 3 }
-      stronghold_corridor:        { enabled: false, chance: 2 }
-      stronghold_library:         { enabled: false, chance: 3 }
-      stronghold_crossing:        { enabled: false, chance: 2 }
-      woodland_mansion:           { enabled: false, chance: 4 }
-      igloo:                      { enabled: false, chance: 2 }
-      pillager_outpost:           { enabled: false, chance: 3 }
-      shipwreck_map:              { enabled: false, chance: 2 }
-      shipwreck_supply:           { enabled: false, chance: 2 }
-      shipwreck_treasure:         { enabled: false, chance: 3 }
-      ocean_ruin_big:             { enabled: false, chance: 2 }
-      ocean_ruin_small:           { enabled: false, chance: 2 }
-      buried_treasure:            { enabled: false, chance: 3 }
-      ruined_portal:              { enabled: false, chance: 2 }
-      ancient_city:               { enabled: false, chance: 2 }
-      ancient_city_ice_box:       { enabled: false, chance: 2 }
-      village_armorer:            { enabled: false, chance: 2 }
-      village_butcher:            { enabled: false, chance: 2 }
-      village_cartographer:       { enabled: false, chance: 2 }
-      village_desert_house:       { enabled: false, chance: 2 }
-      village_fisher:             { enabled: false, chance: 2 }
-      village_fletcher:           { enabled: false, chance: 2 }
-      village_mason:              { enabled: false, chance: 2 }
-      village_plains_house:       { enabled: false, chance: 2 }
-      village_savanna_house:      { enabled: false, chance: 2 }
-      village_shepherd:           { enabled: false, chance: 2 }
-      village_snowy_house:        { enabled: false, chance: 2 }
-      village_taiga_house:        { enabled: false, chance: 2 }
-      village_tannery:            { enabled: false, chance: 2 }
-      village_temple:             { enabled: false, chance: 2 }
-      village_toolsmith:          { enabled: false, chance: 2 }
-      village_weaponsmith:        { enabled: false, chance: 2 }
       nether_fortress:            { enabled: false, chance: 3 }
-      bastion_bridge:             { enabled: false, chance: 2 }
-      bastion_hoglin_stable:      { enabled: false, chance: 2 }
-      bastion_other:              { enabled: false, chance: 3 }
-      bastion_treasure:           { enabled: false, chance: 2 }
-      end_city:                   { enabled: false, chance: 3 }
-      trial_chambers_supply:      { enabled: false, chance: 3 }
-      trial_chambers_corridor:    { enabled: false, chance: 3 }
-      trial_chambers_entrance:    { enabled: false, chance: 3 }
-      trial_chambers_intersection: { enabled: false, chance: 2 }
-      trial_chambers_reward:      { enabled: false, chance: 3 }
-      trial_chambers_reward_rare: { enabled: false, chance: 2 }
+      bastion_bridge:             { enabled: false, chance: 0 }
+      bastion_hoglin_stable:      { enabled: false, chance: 0 }
+      bastion_other:              { enabled: false, chance: 2 }
+      bastion_treasure:           { enabled: false, chance: 0 }
+      end_city:                   { enabled: false, chance: 0 }
+      trial_chambers_supply:      { enabled: false, chance: 0 }
+      trial_chambers_corridor:    { enabled: false, chance: 0 }
+      trial_chambers_entrance:    { enabled: false, chance: 0 }
+      trial_chambers_intersection: { enabled: false, chance: 0 }
+      trial_chambers_reward:      { enabled: false, chance: 0 }
+      trial_chambers_reward_rare: { enabled: false, chance: 0 }
 
   3:
+    enabled: true
     rows: 3
     display-name: '&eTier 3 Backpack'
     texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTI1NGFhY2JmNjIzMTc1ZmY5OGRmN2FlMzY2ZTBiODllOTE3MTM0NDE3NTJmM2NkZjk2NWYwMzhiMTc0YjUifX19'
@@ -152,55 +156,56 @@ tiers:
         G: GOLD_INGOT
         B: TIER_2_BACKPACK
     loot:
-      dungeon:                    { enabled: false, chance: 2 }
-      mineshaft:                  { enabled: false, chance: 1 }
-      desert_temple:              { enabled: false, chance: 2 }
-      jungle_temple:              { enabled: false, chance: 2 }
-      stronghold_corridor:        { enabled: false, chance: 1 }
-      stronghold_library:         { enabled: false, chance: 2 }
-      stronghold_crossing:        { enabled: false, chance: 1 }
-      woodland_mansion:           { enabled: false, chance: 3 }
-      igloo:                      { enabled: false, chance: 1 }
+      dungeon:                    { enabled: false, chance: 3 }
+      mineshaft:                  { enabled: false, chance: 2 }
+      desert_temple:              { enabled: false, chance: 3 }
+      jungle_temple:              { enabled: false, chance: 3 }
+      stronghold_corridor:        { enabled: false, chance: 2 }
+      stronghold_library:         { enabled: false, chance: 3 }
+      stronghold_crossing:        { enabled: false, chance: 2 }
+      woodland_mansion:           { enabled: false, chance: 4 }
+      igloo:                      { enabled: false, chance: 0 }
       pillager_outpost:           { enabled: false, chance: 2 }
-      shipwreck_map:              { enabled: false, chance: 1 }
-      shipwreck_supply:           { enabled: false, chance: 1 }
-      shipwreck_treasure:         { enabled: false, chance: 2 }
-      ocean_ruin_big:             { enabled: false, chance: 1 }
-      ocean_ruin_small:           { enabled: false, chance: 1 }
-      buried_treasure:            { enabled: false, chance: 2 }
-      ruined_portal:              { enabled: false, chance: 1 }
-      ancient_city:               { enabled: false, chance: 2 }
-      ancient_city_ice_box:       { enabled: false, chance: 1 }
-      village_armorer:            { enabled: false, chance: 1 }
-      village_butcher:            { enabled: false, chance: 1 }
-      village_cartographer:       { enabled: false, chance: 1 }
-      village_desert_house:       { enabled: false, chance: 1 }
-      village_fisher:             { enabled: false, chance: 1 }
-      village_fletcher:           { enabled: false, chance: 1 }
-      village_mason:              { enabled: false, chance: 1 }
-      village_plains_house:       { enabled: false, chance: 1 }
-      village_savanna_house:      { enabled: false, chance: 1 }
-      village_shepherd:           { enabled: false, chance: 1 }
-      village_snowy_house:        { enabled: false, chance: 1 }
-      village_taiga_house:        { enabled: false, chance: 1 }
-      village_tannery:            { enabled: false, chance: 1 }
-      village_temple:             { enabled: false, chance: 1 }
-      village_toolsmith:          { enabled: false, chance: 1 }
-      village_weaponsmith:        { enabled: false, chance: 1 }
-      nether_fortress:            { enabled: false, chance: 2 }
-      bastion_bridge:             { enabled: false, chance: 1 }
-      bastion_hoglin_stable:      { enabled: false, chance: 1 }
-      bastion_other:              { enabled: false, chance: 2 }
-      bastion_treasure:           { enabled: false, chance: 1 }
-      end_city:                   { enabled: false, chance: 2 }
+      shipwreck_map:              { enabled: false, chance: 0 }
+      shipwreck_supply:           { enabled: false, chance: 0 }
+      shipwreck_treasure:         { enabled: false, chance: 3 }
+      ocean_ruin_big:             { enabled: false, chance: 2 }
+      ocean_ruin_small:           { enabled: false, chance: 0 }
+      buried_treasure:            { enabled: false, chance: 3 }
+      ruined_portal:              { enabled: false, chance: 2 }
+      ancient_city:               { enabled: false, chance: 3 }
+      ancient_city_ice_box:       { enabled: false, chance: 2 }
+      village_armorer:            { enabled: false, chance: 0 }
+      village_butcher:            { enabled: false, chance: 0 }
+      village_cartographer:       { enabled: false, chance: 0 }
+      village_desert_house:       { enabled: false, chance: 0 }
+      village_fisher:             { enabled: false, chance: 0 }
+      village_fletcher:           { enabled: false, chance: 0 }
+      village_mason:              { enabled: false, chance: 0 }
+      village_plains_house:       { enabled: false, chance: 0 }
+      village_savanna_house:      { enabled: false, chance: 0 }
+      village_shepherd:           { enabled: false, chance: 0 }
+      village_snowy_house:        { enabled: false, chance: 0 }
+      village_taiga_house:        { enabled: false, chance: 0 }
+      village_tannery:            { enabled: false, chance: 0 }
+      village_temple:             { enabled: false, chance: 0 }
+      village_toolsmith:          { enabled: false, chance: 0 }
+      village_weaponsmith:        { enabled: false, chance: 0 }
+      nether_fortress:            { enabled: false, chance: 3 }
+      bastion_bridge:             { enabled: false, chance: 2 }
+      bastion_hoglin_stable:      { enabled: false, chance: 2 }
+      bastion_other:              { enabled: false, chance: 3 }
+      bastion_treasure:           { enabled: false, chance: 2 }
+      end_city:                   { enabled: false, chance: 0 }
       trial_chambers_supply:      { enabled: false, chance: 2 }
       trial_chambers_corridor:    { enabled: false, chance: 2 }
       trial_chambers_entrance:    { enabled: false, chance: 2 }
-      trial_chambers_intersection: { enabled: false, chance: 1 }
-      trial_chambers_reward:      { enabled: false, chance: 2 }
-      trial_chambers_reward_rare: { enabled: false, chance: 1 }
+      trial_chambers_intersection: { enabled: false, chance: 0 }
+      trial_chambers_reward:      { enabled: false, chance: 3 }
+      trial_chambers_reward_rare: { enabled: false, chance: 0 }
 
   4:
+    enabled: true
     rows: 4
     display-name: '&bTier 4 Backpack'
     texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGY3MGZhYjMyNDZmZTAyN2NlMGJiYTg4NWE3M2M2ZTgyZDhmZjhmMzU4MjMxZTg0NjFmOTU2NTYwY2ZhNThmIn19fQ=='
@@ -215,55 +220,56 @@ tiers:
         L: LEATHER
         B: TIER_3_BACKPACK
     loot:
-      dungeon:                    { enabled: false, chance: 1 }
-      mineshaft:                  { enabled: false, chance: 1 }
-      desert_temple:              { enabled: false, chance: 1 }
-      jungle_temple:              { enabled: false, chance: 1 }
-      stronghold_corridor:        { enabled: false, chance: 1 }
-      stronghold_library:         { enabled: false, chance: 1 }
-      stronghold_crossing:        { enabled: false, chance: 1 }
-      woodland_mansion:           { enabled: false, chance: 2 }
-      igloo:                      { enabled: false, chance: 1 }
-      pillager_outpost:           { enabled: false, chance: 1 }
-      shipwreck_map:              { enabled: false, chance: 1 }
-      shipwreck_supply:           { enabled: false, chance: 1 }
-      shipwreck_treasure:         { enabled: false, chance: 1 }
-      ocean_ruin_big:             { enabled: false, chance: 1 }
-      ocean_ruin_small:           { enabled: false, chance: 1 }
-      buried_treasure:            { enabled: false, chance: 1 }
-      ruined_portal:              { enabled: false, chance: 1 }
-      ancient_city:               { enabled: false, chance: 1 }
-      ancient_city_ice_box:       { enabled: false, chance: 1 }
-      village_armorer:            { enabled: false, chance: 1 }
-      village_butcher:            { enabled: false, chance: 1 }
-      village_cartographer:       { enabled: false, chance: 1 }
-      village_desert_house:       { enabled: false, chance: 1 }
-      village_fisher:             { enabled: false, chance: 1 }
-      village_fletcher:           { enabled: false, chance: 1 }
-      village_mason:              { enabled: false, chance: 1 }
-      village_plains_house:       { enabled: false, chance: 1 }
-      village_savanna_house:      { enabled: false, chance: 1 }
-      village_shepherd:           { enabled: false, chance: 1 }
-      village_snowy_house:        { enabled: false, chance: 1 }
-      village_taiga_house:        { enabled: false, chance: 1 }
-      village_tannery:            { enabled: false, chance: 1 }
-      village_temple:             { enabled: false, chance: 1 }
-      village_toolsmith:          { enabled: false, chance: 1 }
-      village_weaponsmith:        { enabled: false, chance: 1 }
-      nether_fortress:            { enabled: false, chance: 1 }
-      bastion_bridge:             { enabled: false, chance: 1 }
-      bastion_hoglin_stable:      { enabled: false, chance: 1 }
-      bastion_other:              { enabled: false, chance: 1 }
-      bastion_treasure:           { enabled: false, chance: 1 }
+      dungeon:                    { enabled: false, chance: 0 }
+      mineshaft:                  { enabled: false, chance: 0 }
+      desert_temple:              { enabled: false, chance: 2 }
+      jungle_temple:              { enabled: false, chance: 2 }
+      stronghold_corridor:        { enabled: false, chance: 2 }
+      stronghold_library:         { enabled: false, chance: 2 }
+      stronghold_crossing:        { enabled: false, chance: 0 }
+      woodland_mansion:           { enabled: false, chance: 3 }
+      igloo:                      { enabled: false, chance: 0 }
+      pillager_outpost:           { enabled: false, chance: 0 }
+      shipwreck_map:              { enabled: false, chance: 0 }
+      shipwreck_supply:           { enabled: false, chance: 0 }
+      shipwreck_treasure:         { enabled: false, chance: 2 }
+      ocean_ruin_big:             { enabled: false, chance: 0 }
+      ocean_ruin_small:           { enabled: false, chance: 0 }
+      buried_treasure:            { enabled: false, chance: 2 }
+      ruined_portal:              { enabled: false, chance: 0 }
+      ancient_city:               { enabled: false, chance: 3 }
+      ancient_city_ice_box:       { enabled: false, chance: 2 }
+      village_armorer:            { enabled: false, chance: 0 }
+      village_butcher:            { enabled: false, chance: 0 }
+      village_cartographer:       { enabled: false, chance: 0 }
+      village_desert_house:       { enabled: false, chance: 0 }
+      village_fisher:             { enabled: false, chance: 0 }
+      village_fletcher:           { enabled: false, chance: 0 }
+      village_mason:              { enabled: false, chance: 0 }
+      village_plains_house:       { enabled: false, chance: 0 }
+      village_savanna_house:      { enabled: false, chance: 0 }
+      village_shepherd:           { enabled: false, chance: 0 }
+      village_snowy_house:        { enabled: false, chance: 0 }
+      village_taiga_house:        { enabled: false, chance: 0 }
+      village_tannery:            { enabled: false, chance: 0 }
+      village_temple:             { enabled: false, chance: 0 }
+      village_toolsmith:          { enabled: false, chance: 0 }
+      village_weaponsmith:        { enabled: false, chance: 0 }
+      nether_fortress:            { enabled: false, chance: 2 }
+      bastion_bridge:             { enabled: false, chance: 2 }
+      bastion_hoglin_stable:      { enabled: false, chance: 2 }
+      bastion_other:              { enabled: false, chance: 3 }
+      bastion_treasure:           { enabled: false, chance: 3 }
       end_city:                   { enabled: false, chance: 2 }
-      trial_chambers_supply:      { enabled: false, chance: 1 }
-      trial_chambers_corridor:    { enabled: false, chance: 1 }
-      trial_chambers_entrance:    { enabled: false, chance: 1 }
-      trial_chambers_intersection: { enabled: false, chance: 1 }
-      trial_chambers_reward:      { enabled: false, chance: 2 }
-      trial_chambers_reward_rare: { enabled: false, chance: 1 }
+      trial_chambers_supply:      { enabled: false, chance: 2 }
+      trial_chambers_corridor:    { enabled: false, chance: 0 }
+      trial_chambers_entrance:    { enabled: false, chance: 0 }
+      trial_chambers_intersection: { enabled: false, chance: 2 }
+      trial_chambers_reward:      { enabled: false, chance: 3 }
+      trial_chambers_reward_rare: { enabled: false, chance: 2 }
 
   5:
+    enabled: true
     rows: 5
     display-name: '&aTier 5 Backpack'
     texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTk5MDlhOTc3OWI5NDZiOTc4NzQ0MmZhNDgzYWY0ZGU0YjJmMTlmZDQwZGMyMzcwZjdhOWI4ZjUyMWYyMWRkYyJ9fX0='
@@ -278,55 +284,56 @@ tiers:
         I: IRON_INGOT
         B: TIER_4_BACKPACK
     loot:
-      dungeon:                    { enabled: false, chance: 1 }
-      mineshaft:                  { enabled: false, chance: 1 }
-      desert_temple:              { enabled: false, chance: 1 }
-      jungle_temple:              { enabled: false, chance: 1 }
-      stronghold_corridor:        { enabled: false, chance: 1 }
-      stronghold_library:         { enabled: false, chance: 1 }
-      stronghold_crossing:        { enabled: false, chance: 1 }
-      woodland_mansion:           { enabled: false, chance: 1 }
-      igloo:                      { enabled: false, chance: 1 }
-      pillager_outpost:           { enabled: false, chance: 1 }
-      shipwreck_map:              { enabled: false, chance: 1 }
-      shipwreck_supply:           { enabled: false, chance: 1 }
-      shipwreck_treasure:         { enabled: false, chance: 1 }
-      ocean_ruin_big:             { enabled: false, chance: 1 }
-      ocean_ruin_small:           { enabled: false, chance: 1 }
-      buried_treasure:            { enabled: false, chance: 1 }
-      ruined_portal:              { enabled: false, chance: 1 }
-      ancient_city:               { enabled: false, chance: 1 }
-      ancient_city_ice_box:       { enabled: false, chance: 1 }
-      village_armorer:            { enabled: false, chance: 1 }
-      village_butcher:            { enabled: false, chance: 1 }
-      village_cartographer:       { enabled: false, chance: 1 }
-      village_desert_house:       { enabled: false, chance: 1 }
-      village_fisher:             { enabled: false, chance: 1 }
-      village_fletcher:           { enabled: false, chance: 1 }
-      village_mason:              { enabled: false, chance: 1 }
-      village_plains_house:       { enabled: false, chance: 1 }
-      village_savanna_house:      { enabled: false, chance: 1 }
-      village_shepherd:           { enabled: false, chance: 1 }
-      village_snowy_house:        { enabled: false, chance: 1 }
-      village_taiga_house:        { enabled: false, chance: 1 }
-      village_tannery:            { enabled: false, chance: 1 }
-      village_temple:             { enabled: false, chance: 1 }
-      village_toolsmith:          { enabled: false, chance: 1 }
-      village_weaponsmith:        { enabled: false, chance: 1 }
-      nether_fortress:            { enabled: false, chance: 1 }
-      bastion_bridge:             { enabled: false, chance: 1 }
-      bastion_hoglin_stable:      { enabled: false, chance: 1 }
-      bastion_other:              { enabled: false, chance: 1 }
-      bastion_treasure:           { enabled: false, chance: 1 }
-      end_city:                   { enabled: false, chance: 1 }
-      trial_chambers_supply:      { enabled: false, chance: 1 }
-      trial_chambers_corridor:    { enabled: false, chance: 1 }
-      trial_chambers_entrance:    { enabled: false, chance: 1 }
-      trial_chambers_intersection: { enabled: false, chance: 1 }
-      trial_chambers_reward:      { enabled: false, chance: 1 }
-      trial_chambers_reward_rare: { enabled: false, chance: 1 }
+      dungeon:                    { enabled: false, chance: 0 }
+      mineshaft:                  { enabled: false, chance: 0 }
+      desert_temple:              { enabled: false, chance: 0 }
+      jungle_temple:              { enabled: false, chance: 0 }
+      stronghold_corridor:        { enabled: false, chance: 0 }
+      stronghold_library:         { enabled: false, chance: 2 }
+      stronghold_crossing:        { enabled: false, chance: 0 }
+      woodland_mansion:           { enabled: false, chance: 2 }
+      igloo:                      { enabled: false, chance: 0 }
+      pillager_outpost:           { enabled: false, chance: 0 }
+      shipwreck_map:              { enabled: false, chance: 0 }
+      shipwreck_supply:           { enabled: false, chance: 0 }
+      shipwreck_treasure:         { enabled: false, chance: 0 }
+      ocean_ruin_big:             { enabled: false, chance: 0 }
+      ocean_ruin_small:           { enabled: false, chance: 0 }
+      buried_treasure:            { enabled: false, chance: 0 }
+      ruined_portal:              { enabled: false, chance: 0 }
+      ancient_city:               { enabled: false, chance: 3 }
+      ancient_city_ice_box:       { enabled: false, chance: 2 }
+      village_armorer:            { enabled: false, chance: 0 }
+      village_butcher:            { enabled: false, chance: 0 }
+      village_cartographer:       { enabled: false, chance: 0 }
+      village_desert_house:       { enabled: false, chance: 0 }
+      village_fisher:             { enabled: false, chance: 0 }
+      village_fletcher:           { enabled: false, chance: 0 }
+      village_mason:              { enabled: false, chance: 0 }
+      village_plains_house:       { enabled: false, chance: 0 }
+      village_savanna_house:      { enabled: false, chance: 0 }
+      village_shepherd:           { enabled: false, chance: 0 }
+      village_snowy_house:        { enabled: false, chance: 0 }
+      village_taiga_house:        { enabled: false, chance: 0 }
+      village_tannery:            { enabled: false, chance: 0 }
+      village_temple:             { enabled: false, chance: 0 }
+      village_toolsmith:          { enabled: false, chance: 0 }
+      village_weaponsmith:        { enabled: false, chance: 0 }
+      nether_fortress:            { enabled: false, chance: 0 }
+      bastion_bridge:             { enabled: false, chance: 0 }
+      bastion_hoglin_stable:      { enabled: false, chance: 0 }
+      bastion_other:              { enabled: false, chance: 2 }
+      bastion_treasure:           { enabled: false, chance: 2 }
+      end_city:                   { enabled: false, chance: 3 }
+      trial_chambers_supply:      { enabled: false, chance: 0 }
+      trial_chambers_corridor:    { enabled: false, chance: 0 }
+      trial_chambers_entrance:    { enabled: false, chance: 0 }
+      trial_chambers_intersection: { enabled: false, chance: 0 }
+      trial_chambers_reward:      { enabled: false, chance: 2 }
+      trial_chambers_reward_rare: { enabled: false, chance: 2 }
 
   6:
+    enabled: true
     rows: 6
     display-name: '&8Tier 6 Backpack'
     texture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWViNjViYmU3NDQ5NDU4NDFlOTIzNGEzM2I1Y2U1Y2MyMzZmNmEyZmM5M2ExYTNhZTQyZGY3N2M5MDg0ZGYxZSJ9fX0='
@@ -341,50 +348,50 @@ tiers:
         G: GOLD_INGOT
         B: TIER_5_BACKPACK
     loot:
-      dungeon:                    { enabled: false, chance: 1 }
-      mineshaft:                  { enabled: false, chance: 1 }
-      desert_temple:              { enabled: false, chance: 1 }
-      jungle_temple:              { enabled: false, chance: 1 }
-      stronghold_corridor:        { enabled: false, chance: 1 }
-      stronghold_library:         { enabled: false, chance: 1 }
-      stronghold_crossing:        { enabled: false, chance: 1 }
+      dungeon:                    { enabled: false, chance: 0 }
+      mineshaft:                  { enabled: false, chance: 0 }
+      desert_temple:              { enabled: false, chance: 0 }
+      jungle_temple:              { enabled: false, chance: 0 }
+      stronghold_corridor:        { enabled: false, chance: 0 }
+      stronghold_library:         { enabled: false, chance: 0 }
+      stronghold_crossing:        { enabled: false, chance: 0 }
       woodland_mansion:           { enabled: false, chance: 1 }
-      igloo:                      { enabled: false, chance: 1 }
-      pillager_outpost:           { enabled: false, chance: 1 }
-      shipwreck_map:              { enabled: false, chance: 1 }
-      shipwreck_supply:           { enabled: false, chance: 1 }
-      shipwreck_treasure:         { enabled: false, chance: 1 }
-      ocean_ruin_big:             { enabled: false, chance: 1 }
-      ocean_ruin_small:           { enabled: false, chance: 1 }
-      buried_treasure:            { enabled: false, chance: 1 }
-      ruined_portal:              { enabled: false, chance: 1 }
+      igloo:                      { enabled: false, chance: 0 }
+      pillager_outpost:           { enabled: false, chance: 0 }
+      shipwreck_map:              { enabled: false, chance: 0 }
+      shipwreck_supply:           { enabled: false, chance: 0 }
+      shipwreck_treasure:         { enabled: false, chance: 0 }
+      ocean_ruin_big:             { enabled: false, chance: 0 }
+      ocean_ruin_small:           { enabled: false, chance: 0 }
+      buried_treasure:            { enabled: false, chance: 0 }
+      ruined_portal:              { enabled: false, chance: 0 }
       ancient_city:               { enabled: false, chance: 1 }
       ancient_city_ice_box:       { enabled: false, chance: 1 }
-      village_armorer:            { enabled: false, chance: 1 }
-      village_butcher:            { enabled: false, chance: 1 }
-      village_cartographer:       { enabled: false, chance: 1 }
-      village_desert_house:       { enabled: false, chance: 1 }
-      village_fisher:             { enabled: false, chance: 1 }
-      village_fletcher:           { enabled: false, chance: 1 }
-      village_mason:              { enabled: false, chance: 1 }
-      village_plains_house:       { enabled: false, chance: 1 }
-      village_savanna_house:      { enabled: false, chance: 1 }
-      village_shepherd:           { enabled: false, chance: 1 }
-      village_snowy_house:        { enabled: false, chance: 1 }
-      village_taiga_house:        { enabled: false, chance: 1 }
-      village_tannery:            { enabled: false, chance: 1 }
-      village_temple:             { enabled: false, chance: 1 }
-      village_toolsmith:          { enabled: false, chance: 1 }
-      village_weaponsmith:        { enabled: false, chance: 1 }
-      nether_fortress:            { enabled: false, chance: 1 }
-      bastion_bridge:             { enabled: false, chance: 1 }
-      bastion_hoglin_stable:      { enabled: false, chance: 1 }
-      bastion_other:              { enabled: false, chance: 1 }
+      village_armorer:            { enabled: false, chance: 0 }
+      village_butcher:            { enabled: false, chance: 0 }
+      village_cartographer:       { enabled: false, chance: 0 }
+      village_desert_house:       { enabled: false, chance: 0 }
+      village_fisher:             { enabled: false, chance: 0 }
+      village_fletcher:           { enabled: false, chance: 0 }
+      village_mason:              { enabled: false, chance: 0 }
+      village_plains_house:       { enabled: false, chance: 0 }
+      village_savanna_house:      { enabled: false, chance: 0 }
+      village_shepherd:           { enabled: false, chance: 0 }
+      village_snowy_house:        { enabled: false, chance: 0 }
+      village_taiga_house:        { enabled: false, chance: 0 }
+      village_tannery:            { enabled: false, chance: 0 }
+      village_temple:             { enabled: false, chance: 0 }
+      village_toolsmith:          { enabled: false, chance: 0 }
+      village_weaponsmith:        { enabled: false, chance: 0 }
+      nether_fortress:            { enabled: false, chance: 0 }
+      bastion_bridge:             { enabled: false, chance: 0 }
+      bastion_hoglin_stable:      { enabled: false, chance: 0 }
+      bastion_other:              { enabled: false, chance: 0 }
       bastion_treasure:           { enabled: false, chance: 1 }
       end_city:                   { enabled: false, chance: 1 }
-      trial_chambers_supply:      { enabled: false, chance: 1 }
-      trial_chambers_corridor:    { enabled: false, chance: 1 }
-      trial_chambers_entrance:    { enabled: false, chance: 1 }
-      trial_chambers_intersection: { enabled: false, chance: 1 }
+      trial_chambers_supply:      { enabled: false, chance: 0 }
+      trial_chambers_corridor:    { enabled: false, chance: 0 }
+      trial_chambers_entrance:    { enabled: false, chance: 0 }
+      trial_chambers_intersection: { enabled: false, chance: 0 }
       trial_chambers_reward:      { enabled: false, chance: 1 }
       trial_chambers_reward_rare: { enabled: false, chance: 1 }

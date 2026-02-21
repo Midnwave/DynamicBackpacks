@@ -12,7 +12,12 @@ import com.blockforge.dynamicbackpacks.listeners.BackpackInventoryListener;
 import com.blockforge.dynamicbackpacks.listeners.BackpackProtectListener;
 import com.blockforge.dynamicbackpacks.loot.LootManager;
 import com.blockforge.dynamicbackpacks.recipe.RecipeManager;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class DynamicBackpacks extends JavaPlugin {
 
@@ -109,8 +114,14 @@ public class DynamicBackpacks extends JavaPlugin {
     }
 
     public void reload() {
-        if (backpackManager != null) {
-            backpackManager.saveAll();
+        // Close all open backpack inventories (triggers save via InventoryCloseEvent)
+        if (backpackSession != null) {
+            for (UUID playerUUID : new ArrayList<>(backpackSession.getAllOpenSessions().values())) {
+                Player player = Bukkit.getPlayer(playerUUID);
+                if (player != null) {
+                    player.closeInventory();
+                }
+            }
         }
 
         configManager.load();
