@@ -22,6 +22,7 @@ public class DynamicBackpacks extends JavaPlugin {
     private BackpackSession backpackSession;
     private BackpackManager backpackManager;
     private RecipeManager recipeManager;
+    private UpdateChecker updateChecker;
 
     @Override
     public void onEnable() {
@@ -63,7 +64,29 @@ public class DynamicBackpacks extends JavaPlugin {
         getCommand("dbp").setExecutor(dbpCmd);
         getCommand("dbp").setTabCompleter(dbpCmd);
 
+        updateChecker = new UpdateChecker(this);
+        runStartupUpdateCheck();
+
         getLogger().info("DynamicBackpacks enabled! Mode: " + configManager.getMode());
+    }
+
+    private void runStartupUpdateCheck() {
+        int current = updateChecker.getCurrentBuild();
+        if (current == 0) {
+            getLogger().info("Running a local build — update check skipped.");
+            return;
+        }
+        getLogger().info("Running dev build #" + current + ", checking for updates...");
+        updateChecker.checkAsync(latest -> {
+            if (latest == null) {
+                getLogger().warning("Could not check for updates.");
+            } else if (latest > current) {
+                getLogger().warning("Update available! Build #" + current + " → #" + latest
+                        + " | https://github.com/Midnwave/DynamicBackpacks/releases/latest");
+            } else {
+                getLogger().info("Plugin is up to date (dev-" + current + ").");
+            }
+        });
     }
 
     @Override
@@ -95,11 +118,11 @@ public class DynamicBackpacks extends JavaPlugin {
         getLogger().info("DynamicBackpacks reloaded.");
     }
 
-
     public static DynamicBackpacks getInstance() { return instance; }
     public ConfigManager getConfigManager() { return configManager; }
     public DatabaseManager getDatabaseManager() { return databaseManager; }
     public BackpackSession getBackpackSession() { return backpackSession; }
     public BackpackManager getBackpackManager() { return backpackManager; }
     public RecipeManager getRecipeManager() { return recipeManager; }
+    public UpdateChecker getUpdateChecker() { return updateChecker; }
 }

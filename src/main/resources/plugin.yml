@@ -13,7 +13,7 @@ commands:
   dbp:
     description: DynamicBackpacks admin commands
     aliases: [dynamicbackpacks]
-    usage: /dbp <reload|give|restore>
+    usage: /dbp <reload|give|restore|update>
     permission: dynamicbackpacks.admin
 
 permissions:

@@ -34,10 +34,11 @@ public class AdminCommand implements CommandExecutor, TabCompleter {
         }
 
         switch (args[0].toLowerCase()) {
-            case "reload" -> handleReload(sender);
-            case "give"   -> handleGive(sender, args);
+            case "reload"  -> handleReload(sender);
+            case "give"    -> handleGive(sender, args);
             case "restore" -> handleRestore(sender, args);
-            default -> sendUsage(sender);
+            case "update"  -> handleUpdate(sender);
+            default        -> sendUsage(sender);
         }
         return true;
     }
@@ -139,10 +140,40 @@ public class AdminCommand implements CommandExecutor, TabCompleter {
         sender.sendMessage(ChatColor.GREEN + "Restored backpack " + backpackUUID + " to " + target.getName() + ".");
     }
 
+    private void handleUpdate(CommandSender sender) {
+        if (!sender.hasPermission("dynamicbackpacks.admin")) {
+            sender.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
+            return;
+        }
+
+        int current = plugin.getUpdateChecker().getCurrentBuild();
+        if (current == 0) {
+            sender.sendMessage(ChatColor.YELLOW + "Running a local build — no version to compare.");
+            return;
+        }
+
+        sender.sendMessage(ChatColor.GRAY + "Checking for updates...");
+        plugin.getUpdateChecker().checkAsync(latest -> {
+            if (latest == null) {
+                sender.sendMessage(ChatColor.RED + "Could not reach GitHub to check for updates.");
+            } else if (latest > current) {
+                sender.sendMessage(ChatColor.GREEN + "Update available! "
+                        + ChatColor.YELLOW + "dev-" + current
+                        + ChatColor.GREEN + " \u2192 "
+                        + ChatColor.AQUA + "dev-" + latest);
+                sender.sendMessage(ChatColor.GRAY + "https://github.com/Midnwave/DynamicBackpacks/releases/latest");
+            } else {
+                sender.sendMessage(ChatColor.GREEN + "You are on the latest build "
+                        + ChatColor.AQUA + "(dev-" + current + ")" + ChatColor.GREEN + ".");
+            }
+        });
+    }
+
     private void sendUsage(CommandSender sender) {
         sender.sendMessage(ChatColor.YELLOW + "/dbp reload");
         sender.sendMessage(ChatColor.YELLOW + "/dbp give <player> <tier>");
         sender.sendMessage(ChatColor.YELLOW + "/dbp restore <uuid> <player>");
+        sender.sendMessage(ChatColor.YELLOW + "/dbp update");
     }
 
     @Override
@@ -150,7 +181,7 @@ public class AdminCommand implements CommandExecutor, TabCompleter {
         List<String> completions = new ArrayList<>();
         if (args.length == 1) {
             String partial = args[0].toLowerCase();
-            for (String sub : Arrays.asList("reload", "give", "restore")) {
+            for (String sub : Arrays.asList("reload", "give", "restore", "update")) {
                 if (sub.startsWith(partial)) completions.add(sub);
             }
         } else if (args.length == 2) {
