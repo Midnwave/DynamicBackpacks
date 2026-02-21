@@ -1,7 +1,6 @@
 # Gradle
 .gradle/
 build/
-!gradle/wrapper/gradle-wrapper.jar
 
 # IDE
 .idea/
@@ -15,6 +14,7 @@ Thumbs.db
 
 # Plugin jars
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 
 # Claude / AI files
 .claude/
